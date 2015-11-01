@@ -9,23 +9,36 @@ import java.util.Scanner;
 public class Main
 {
     @SuppressWarnings("empty-statement")
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
-        Cloud[] clouds = new Cloud[0];
+        Cloud[] clouds = new Cloud[1];
+
+        //clouds[0] = new OpenStackImpl();
+        clouds[0] = new AmazonImpl();
 
         for (Cloud cloud : clouds)
         {
             cloud.create();
         }
 
-        System.out.println("Press 'A' to destroy instance created.");
-        Scanner scanInput = new Scanner(System.in);
-        
-        while(!scanInput.nextLine().equals("A"));
-
-        for (Cloud cloud : clouds)
+        try
         {
-            cloud.destroy();
+            System.out.println("Press 'A' to destroy instance created.");
+            Scanner scanInput = new Scanner(System.in);
+
+            while (!scanInput.nextLine().equals("A"));
+
+            for (Cloud cloud : clouds)
+            {
+                cloud.destroy();
+            }
+        }
+        finally
+        {
+            for (Cloud cloud : clouds)
+            {
+                cloud.release();
+            }
         }
     }
 }
