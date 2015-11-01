@@ -32,7 +32,6 @@ import org.jclouds.openstack.nova.v2_0.compute.options.NovaTemplateOptions;
  */
 public class OpenStackImpl implements Cloud
 {
-    private Set<? extends NodeMetadata> activeNode;
     private final ComputeServiceContext computeApi;
 
     public OpenStackImpl()
@@ -89,7 +88,7 @@ public class OpenStackImpl implements Cloud
 
             System.out.println("Creating a MongoDB server using Ubuntu Server Trusty ...");
 
-            this.activeNode = client.createNodesInGroup("lab3", 1, ubuntuTemplate);
+            Set<? extends NodeMetadata> node = client.createNodesInGroup("lab3", 1, ubuntuTemplate);
             this.WaitForInstance("MongoDB", client);
 
             System.out.println("Done.");

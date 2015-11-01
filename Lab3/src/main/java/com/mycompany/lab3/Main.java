@@ -11,10 +11,10 @@ public class Main
     @SuppressWarnings("empty-statement")
     public static void main(String[] args) throws Exception
     {
-        Cloud[] clouds = new Cloud[1];
+        Cloud[] clouds = new Cloud[2];
 
-        //clouds[0] = new OpenStackImpl();
-        clouds[0] = new AmazonImpl();
+        clouds[0] = new OpenStackImpl();
+        clouds[1] = new AmazonImpl();
 
         for (Cloud cloud : clouds)
         {
