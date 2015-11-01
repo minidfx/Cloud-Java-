@@ -38,10 +38,11 @@ public interface Cloud
      *
      * @param instanceName
      * @param client
+     * @return 
      *
      * @throws InterruptedException
      */
-    default void WaitForInstance(String instanceName, ComputeService client) throws InterruptedException
+    default ComputeMetadata WaitForInstance(String instanceName, ComputeService client) throws InterruptedException
     {
         List<ComputeMetadata> nodes = new ArrayList(client.listNodes());
 
@@ -57,5 +58,7 @@ public interface Cloud
 
             Thread.sleep(1000);
         }
+        
+        return mongoDbNode.get();
     }
 }
